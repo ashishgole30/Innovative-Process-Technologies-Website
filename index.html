@@ -290,7 +290,21 @@
 </body>
 
 <script>
-// 🔍 SEARCH FUNCTION (Improved)
+// 💰 QUOTATION CALCULATOR
+function calculateQuote() {
+  let price = parseFloat(document.getElementById("productSelect").value);
+  let qty = parseInt(document.getElementById("quantity").value);
+
+  if (isNaN(price) || isNaN(qty)) {
+    document.getElementById("totalPrice").innerText = "Please select product and quantity";
+    return;
+  }
+
+  let total = price * qty;
+  document.getElementById("totalPrice").innerText = "Total Price: ₹" + total;
+}
+
+// 🔍 SEARCH FUNCTION
 document.getElementById("searchInput").addEventListener("keyup", function() {
   let input = this.value.toLowerCase();
   let products = document.querySelectorAll("#products .col-md-4, #products .col-md-6");
@@ -303,17 +317,15 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
     if (text.includes(input)) {
       card.style.display = "block";
 
-      // store first matched product
       if (!firstMatch) {
         firstMatch = card;
       }
-
     } else {
       card.style.display = "none";
     }
   });
 
-  // 🔽 Auto scroll to first match
+  // auto scroll
   if (firstMatch && input !== "") {
     firstMatch.scrollIntoView({
       behavior: "smooth",
@@ -322,7 +334,6 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
   }
 });
 </script>
-
 
 
 </html>
