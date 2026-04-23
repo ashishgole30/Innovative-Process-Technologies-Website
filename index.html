@@ -50,6 +50,14 @@
   </div>
 </nav>
 
+<!-- SEARCH BAR -->
+<div class="container mt-5 pt-4">
+  <input type="text" id="searchInput" class="form-control" placeholder="Search products...">
+</div>
+
+
+
+
 <!-- HOME -->
 <section id="home" class="hero">
   <h1>Welcome to Innovative Process Technologies Pvt. Ltd.</h1>
@@ -236,6 +244,36 @@
   </div>
 </section>
 
+
+<!-- QUOTATION -->
+<section class="section container">
+  <h2 class="text-center mb-4">Get Quotation</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <select id="productSelect" class="form-control mb-3">
+        <option value="">Select Product</option>
+        <option value="3500">Ball Valve</option>
+        <option value="2500">Butterfly Valve</option>
+        <option value="2750">Gate Valve</option>
+        <option value="3500">Check Valve</option>
+        <option value="2500">Diaphragm Valve</option>
+      </select>
+
+      <input type="number" id="quantity" class="form-control mb-3" placeholder="Enter Quantity">
+
+      <button class="btn btn-primary w-100" onclick="calculateQuote()">Calculate Price</button>
+
+      <h4 class="text-center mt-3" id="totalPrice"></h4>
+
+    </div>
+  </div>
+</section>
+
+
+
+
 <!-- CONTACT -->
 <section id="contact" class="section container">
   <h2>Contact Us</h2>
@@ -250,4 +288,41 @@
 </footer>
 
 </body>
+
+<script>
+// 🔍 SEARCH FUNCTION (Improved)
+document.getElementById("searchInput").addEventListener("keyup", function() {
+  let input = this.value.toLowerCase();
+  let products = document.querySelectorAll("#products .col-md-4, #products .col-md-6");
+
+  let firstMatch = null;
+
+  products.forEach(function(card) {
+    let text = card.innerText.toLowerCase();
+
+    if (text.includes(input)) {
+      card.style.display = "block";
+
+      // store first matched product
+      if (!firstMatch) {
+        firstMatch = card;
+      }
+
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  // 🔽 Auto scroll to first match
+  if (firstMatch && input !== "") {
+    firstMatch.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+});
+</script>
+
+
+
 </html>
